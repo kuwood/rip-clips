@@ -1,0 +1,9 @@
+language: node_js
+node_js: node
+deploy:
+  provider: heroku
+  api_key:
+    secure: NxFgUeAscJzMp8moJ8tX8Jk4ZvLsw4A1qL/CojhmvcBhYkc1MgtIGxmMOnE7RLi/KXW7I85uQroLJCqeaPBwLlRYdFk7/GfQCCycps19itixfbCph1y3Lh49hV9b/3tc/ELIeAw42oVySSeIRTy/BaKEeigJt2AuyRXvyh8ujNoVivm149MdPh3pI9tuji7+hDS/sU2ENsnE9oaXZS+o66/3FRTRInwlFb6NPg9iHsk8gue8B5wsNN1wlndjKRMa+/F9Wb56jMCph0uhbJPWbbjVpysDMkLMf+NqINsu08F1HVE+20nApQCrM+3jHiy/iErP14uFhVV9AY0UTBjcVB7lJovSldNVyZzQNrp+s0Bu2qS6DSXdOffe7A447p/+SZVapBxiodGDiXrMJ74+wgQ2FMkRtbwvs0wbwPamHQeMvo9W8cWHgFovzxxehgDgOQMYDxQYMuMd1gAWriYvcO0Q5gd4vTcIoS4wBXEVjuofM9rATCsCvxypOPUfCZtJP1kwGDayRWNOL4xTyFATVGTBunroGZ/fsq3pM0shdLAv5BmiRRFRpfKQb1Gk5UyUGutF3q+yFIqJSeO7XzjFmW62BKyHJJe0uPz91gNQXVjj+7kdBHzj7gaJmDDSQLstVTnrY/9OCFBLpBuEXzuuW43H9ekA4iv79aj1TsjXRYs=
+  app: stormy-depths-59077
+  on:
+    repo: kuwood/top-clips
