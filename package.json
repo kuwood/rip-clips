@@ -1,0 +1,25 @@
+{
+  "name": "top-clips",
+  "version": "1.0.0",
+  "description": "A place for users to find the most entertaining video clips and keep a library of thier own clip submissions.",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kuwood/top-clips.git"
+  },
+  "keywords": [
+    "twitch"
+  ],
+  "author": "KU",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kuwood/top-clips/issues"
+  },
+  "homepage": "https://github.com/kuwood/top-clips#readme",
+  "dependencies": {
+    "express": "^4.14.0"
+  }
+}
