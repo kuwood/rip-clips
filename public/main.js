@@ -5,7 +5,7 @@ let mockVideoList = {
             "vid_id": 1,
             "title": "I'M WINNING",
             "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "#",
+            "author": "Cool_guy_user",
             "date": "1471567701",
             "game": "Dota 2",
             "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
@@ -14,7 +14,7 @@ let mockVideoList = {
             "vid_id": 2,
             "title": "I'M LOSING",
             "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "#",
+            "author": "Cool_guy_user",
             "date": "1471567701",
             "game": "Dota 2",
             "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
@@ -23,7 +23,7 @@ let mockVideoList = {
             "vid_id": 3,
             "title": "IT'S TIED",
             "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "#",
+            "author": "Cool_guy_user",
             "date": "1471567701",
             "game": "Dota 2",
             "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
@@ -32,7 +32,7 @@ let mockVideoList = {
             "vid_id": 4,
             "title": "I'M WINNING AGAIN!!",
             "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "#",
+            "author": "Cool_guy_user",
             "date": "1471567701",
             "game": "Dota 2",
             "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
@@ -41,7 +41,7 @@ let mockVideoList = {
             "vid_id": 5,
             "title": "I'M LOSING AGAIN...",
             "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
+            "author": "Cool_guy_user",
             "date": "1471567701",
             "game": "Dota 2",
             "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
@@ -50,7 +50,7 @@ let mockVideoList = {
             "vid_id": 6,
             "title": "TIED...AGAIN...",
             "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "#",
+            "author": "Cool_guy_user",
             "date": "1471567701",
             "game": "Dota 2",
             "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
@@ -59,7 +59,7 @@ let mockVideoList = {
             "vid_id": 7,
             "title": "IS IT OVER YET???",
             "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "#",
+            "author": "Cool_guy_user",
             "date": "1471567701",
             "game": "Dota 2",
             "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
@@ -68,7 +68,7 @@ let mockVideoList = {
             "vid_id": 8,
             "title": "NOW ITS OVER...",
             "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "#",
+            "author": "Cool_guy_user",
             "date": "1471567701",
             "game": "Dota 2",
             "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
@@ -130,8 +130,14 @@ function getTopVideos(callback) {
 
 function showVideoList(data) {
     for (index in data.videos) {
-        $('#videos').append('<div class="vid"><a href="#"><img src=' + data.videos[index].img + '></a>' +
-                         '<p>' + data.videos[index].title + '</p></div>')
+        $('#videos').append('<div class="vid"><a href="#"><img src=' +
+                            data.videos[index].img + '></a>' +
+                            '<div class="details-box"><a class="vid-details" href="' +
+                            data.videos[index].author + '">' +
+                            data.videos[index].author + '</a>' +
+                            '<a class="vid-details" href="' + data.videos[index].game + '">' +
+                            data.videos[index].game + '</a></div>' +
+                            '<p>' + data.videos[index].title + '</p></div>')
     }
 }
 
@@ -153,8 +159,11 @@ function shrinkTitle(title) {
 function showUserData(user) {
     $('#user-name').html(user.name)
     for (index in user.videos) {
-        $('.myClips').append('<div class="vid-small"><a href="#"><img src=' +
-                            user.videos[index].img + '></a><p>' +
+        $('.myClips').append('<div class="vid-small"><i class="fa fa-times-circle" aria-hidden="true"></i>' +
+                            '<a href="#"><img src=' +
+                            user.videos[index].img +
+                            '></a><a class="vid-details flex center" href="' + user.videos[index].game + '">' +
+                            user.videos[index].game + '</a><p>' +
                             shrinkTitle(user.videos[index].title) + '</p></div>')
     }
 }
@@ -162,4 +171,11 @@ function showUserData(user) {
 $(() => {
     getAndShowVideos()
     loginUser1()
+    $('.burger').click(() => {
+        if ($('.user-panel').css('right') === '0px') {
+            $('.user-panel').css('right','-700px')
+        } else {
+            $('.user-panel').css('right','0px')
+        }
+    })
 })

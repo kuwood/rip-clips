@@ -4,6 +4,11 @@
 
 a{
     text-decoration: none;
+    color: #7C4DFF;
+}
+
+p {
+    margin-top: 0;
 }
 
 html {
@@ -103,6 +108,15 @@ body{
     min-width: 100%;
 }
 
+.details-box {
+    display: flex;
+}
+
+.vid-details {
+    flex: 2;
+    justify-content: space-between;
+}
+
 .vid {
     padding: 0 20px;
     text-align: center;
@@ -113,12 +127,16 @@ body{
     width: 100%;
 }
 
+.burger {
+    display: none;
+}
 
 .user-panel {
     flex: 1 1;
     background-color: #455A64;
     text-align: center;
     height: 100%;
+    overflow-y: auto;
 }
 
 .user-box {
@@ -144,8 +162,15 @@ body{
     padding: 0 20px;
     min-width: 25%;
     display: inline-block;
-
+    position: relative;
 }
+
+.fa-times-circle {
+    color: red;
+    top: 0;
+    position: absolute;
+}
+
 .vid-small img {
     height: 100px;
 }
@@ -157,6 +182,10 @@ body{
 
 .center {
     justify-content: center;
+}
+
+.flex {
+    display: flex;
 }
 
 .pad-5 {
@@ -270,8 +299,7 @@ body{
     .purple {align-items: center;}
     .purple h1 {padding: 0;}
     .account-box {padding-left: 20px;}
-}
-
-@media (max-width: 550px) {
-    .vid {max-width: 100%}
+    .vid {max-width: 100%;}
+    .user-panel {right: -700px;position: absolute;width: 80%;transition-duration: 0.5s; transition-timing-function: linear; transition-delay: 0.3;}
+    .burger {position:fixed;display:block;top: 0;right: 20px;z-index: 1000;}
 }
