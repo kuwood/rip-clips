@@ -20,7 +20,15 @@
   },
   "homepage": "https://github.com/kuwood/top-clips#readme",
   "dependencies": {
-    "express": "^4.14.0"
+    "body-parser": "^1.15.2",
+    "cheerio": "^0.22.0",
+    "cookie-parser": "^1.4.3",
+    "cookie-session": "^2.0.0-alpha.1",
+    "express": "^4.14.0",
+    "mongoose": "^4.5.9",
+    "passport": "^0.3.2",
+    "passport-twitch": "^1.0.3",
+    "request": "^2.74.0"
   },
   "devDependencies": {
     "chai": "^3.5.0",

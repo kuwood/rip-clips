@@ -76,6 +76,7 @@ body{
   -webkit-box-shadow: 1px 2px 5px #212121;
   -moz-box-shadow: 1px 2px 5px #212121;
   box-shadow: 1px 2px 5px #212121;
+  border: none;
   color: #ffffff;
   font-size: 14px;
   background: #7C4DFF;
@@ -211,7 +212,7 @@ body{
   white-space: nowrap;
 }
 
-.container-4 input#search{
+.container-4 input.search{
   width: 100%;
   height: 30px;
   outline: none !important;
@@ -226,19 +227,19 @@ body{
   border-radius: 2px;
 }
 
-.container-4 input#search::-webkit-input-placeholder {
+.container-4 input.search::-webkit-input-placeholder {
    color: #CFD8DC;
 }
 
-.container-4 input#search:-moz-placeholder { /* Firefox 18- */
+.container-4 input.search:-moz-placeholder { /* Firefox 18- */
    color: #CFD8DC;
 }
 
-.container-4 input#search::-moz-placeholder {  /* Firefox 19+ */
+.container-4 input.search::-moz-placeholder {  /* Firefox 19+ */
    color: #CFD8DC;
 }
 
-.container-4 input#search:-ms-input-placeholder {
+.container-4 input.search:-ms-input-placeholder {
    color: #CFD8DC;
 }
 

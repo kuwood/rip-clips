@@ -17,7 +17,7 @@
                 </div>
                 <div class="box account-box">
                     <div class="container-4">
-                        <input type="search" id="search" placeholder="Search..." />
+                        <input type="search" class="search" id="search" placeholder="Search..." />
                         <button class="icon"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
@@ -31,14 +31,19 @@
                 <a id="user-name" class="user" href="#">USER_NAME</a>
                 <a class="user" href="#">Logout</a>
             </div>
-            <div class="box center">
-                <div class="container-4 width-75">
-                    <input type="search" id="search" placeholder="Enter Clip Url.." />
-                </div>
-            </div>
-            <div class="button-box pad-5">
-                <a class="btn"href="#">Submit Clip</a>
-            </div>
+            <form id="clip-form">
+              <div class="box center">
+                  <div class="container-4 width-75">
+                      <input type="search" required class="search" id="clip-title-input" placeholder="Enter A title" />
+                  </div>
+                  <div class="container-4 width-75">
+                      <input type="search" required class="search" id="clip-input" placeholder="Enter Clip Url.." />
+                  </div>
+              </div>
+              <div class="button-box pad-5">
+                  <button class="btn" >Submit Clip</button>
+              </div>
+            </form>
             <p id="library">My Clips:</p>
             <div class="myClips">
             </div>
