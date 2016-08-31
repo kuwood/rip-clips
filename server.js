@@ -127,9 +127,13 @@ app.post("/scrape", function(req, res) {
             userClip.date = new Date()
             userClip.link = req.body.link
             userClip.twitchId = req.user.twitchId
-            userClip.save()
+            if (userClip.author.length > 0 || userClip.game.length > 0) {
+                userClip.save()
+                res.status(201).json(userClip)
+            } else {
+                res.sendStatus(400)
+            }
 
-            res.status(201).json(userClip)
         } else {
             res.status(500).json(error)
         }
