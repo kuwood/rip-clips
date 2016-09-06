@@ -146,14 +146,6 @@ function showUserData(user) {
     $('#user-name').html(user.name)
     for (index in user.videos) {
         appendClip(user.videos[index])
-
-        /*
-        $('.myClips').append('<div class="vid-small"><i class="fa fa-times-circle" aria-hidden="true"></i>' +
-            '<a href="#"><img src=' +
-            user.videos[index].img +
-            '></a><a class="vid-details flex center" href="' + user.videos[index].game + '">' +
-            user.videos[index].game + '</a><p>' +
-            shrinkTitle(user.videos[index].title) + '</p></div>') */
     }
 }
 
