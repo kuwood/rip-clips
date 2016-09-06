@@ -1,3 +1,5 @@
+/*jshint expr: true*/
+
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 const passport = require("passport")
@@ -7,7 +9,7 @@ const Clip = require('../models/clip-model')
 const mongoose = require('mongoose')
 const server = require('../server.js')
 
-
+const expect = chai.expect
 const should = chai.should()
 const app = server.app
 
@@ -19,7 +21,8 @@ describe('Index page', () => {
             .get('/')
             .end((err, res) => {
                 res.should.have.status(200)
-                res.should.be.html
+                //alternative to res.should.be.html
+                expect(res).to.have.header('content-type', 'text/html; charset=UTF-8')
                 done()
             })
     })
@@ -97,22 +100,45 @@ describe('Not authenticated', () => {
 
 describe('Clips', () => {
     before(done => {
-        mongoose.connect('mongodb://localhost/top-clips-dev');
+        server.runServer()
+        app.request.user = {
+            twitchId: 12345,
+            username: "one",
+            clips: []
+        }
+        app.request.isAuthenticated = () => {
+            return true
+        }
         done()
     })
 
     after(done => {
-        mongoose.connection.close()
+        app.request.isAuthenticated = () => {
+            return false
+        }
         done()
     })
     beforeEach(done => {
+        let tempClip = new Clip ()
+        tempClip.title = "I'M WINNINGett"
+        tempClip.img = "https://clips-media-assets.twitch.tv/22763830688-index-0000003416-preview.jpg"
+        tempClip.author = "Cool_guy_user"
+        tempClip.date = new Date()
+        tempClip.game = "Dota 2"
+        tempClip.link = "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
+        tempClip.twitchId = "12345"
+        tempClip.save((function(err, tempClip) {
+            done(err, tempClip)
+        }))
+    })
+    afterEach(done => {
         Clip.remove({}, err => {
             done()
         })
     })
 
     it('should scrape data from url and create a clip object', done => {
-        let clip = {title: 'test', link: 'https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid'}
+        let clip = {title: 'test', link: 'http://localhost' + ':' + app.config.PORT + '/test-page.html'}
         chai.request(app)
             .post('/scrape')
             .send(clip)
@@ -129,5 +155,27 @@ describe('Clips', () => {
                 res.body.should.have.property('_id')
                 done()
             })
+    })
+
+    it('should remove object from database on delete', done => {
+        let id;
+        chai.request(app)
+        .get('/clips')
+        .end((err, res) => {
+            res.body.should.have.length(1)
+            id = res.body[0]._id
+            chai.request(app)
+                .delete('/clips/' + id)
+                .send(id)
+                .end((err, res) => {
+                    res.should.have.status(204)
+                    chai.request(app)
+                    .get('/clips')
+                    .end((err, res) => {
+                        res.body.should.have.length(0)
+                        done()
+                    })
+                })
+        })
     })
 })
