@@ -15,7 +15,7 @@ const dbConfig = require('./dbConfig')
 const app = express()
 const jsonParser = bodyParser.json()
 const Strategy = require("passport-twitch").Strategy
-
+app.config = dbConfig
 app.use(cookieParser());
 app.use(cookieSession({
     secret: "somesecrettokenhere"
@@ -27,7 +27,7 @@ app.use(cookieSession({
 app.use(bodyParser.json())
 
 app.use(passport.initialize())
-app.use(passport.session());
+app.use(passport.session())
 
 app.use(express.static('public'))
 
@@ -70,11 +70,29 @@ passport.use(new Strategy({
 ));
 
 app.get("/clips", function(req, res) {
-    Clip.find({}),
-    function(err, clip) {
-        console.log(req.clip);
-        res.status(200).json(req.clip)
-    };
+    Clip.find({}).sort('date').exec((err, clips) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            })
+        }
+        res.status(200).json(clips)
+    })
+})
+
+app.get("/search/", (req, res) => {
+    Clip.find({
+        title: req.params.searchTerm
+    },(err, clips) => {
+        if (err) {
+            return res.status(500).json({
+                message: 'Internal Server Error'
+            })
+        }
+        res.sendStatus(200).json(clips)
+    })
+
+
 })
 
 app.get("/auth/twitch", passport.authenticate('twitch'),
@@ -111,10 +129,9 @@ app.get("/myclips", ensureAuthenticated, function(req, res) {
         res.status(200).json(req.user.clips)
     });
 })
-//need to add new clip to frontend myclips list
-app.post("/scrape", function(req, res) {
+
+app.post("/scrape", ensureAuthenticated, function(req, res) {
     url = req.body.link
-    console.log(req.body);
     request(url, function(error, response, html) {
         if (!error) {
             let $ = cheerio.load(html)
@@ -127,7 +144,7 @@ app.post("/scrape", function(req, res) {
             userClip.date = new Date()
             userClip.link = req.body.link
             userClip.twitchId = req.user.twitchId
-            if (userClip.author.length > 0 || userClip.game.length > 0) {
+            if (userClip.author || userClip.game) {
                 userClip.save()
                 res.status(201).json(userClip)
             } else {
@@ -135,16 +152,25 @@ app.post("/scrape", function(req, res) {
             }
 
         } else {
+            console.log(error);
             res.status(500).json(error)
         }
     })
 })
 
-/*app.post("/clips", ensureAuthenticated, function(req, res) {
-    Clip.create({
-
-    })
-})*/
+app.delete('/clips/:id', ensureAuthenticated, (req, res) => {
+    Clip.findOneAndRemove({
+        _id: req.params.id,
+        twitchId: req.user.twitchId
+    }, (err, clip) => {
+            if (err) {
+                return res.status(404).json({
+                    message: "Did not find that id"
+                })
+            }
+            res.sendStatus(204)
+        })
+})
 
 // test authentication middleware
 function ensureAuthenticated(req, res, next) {
