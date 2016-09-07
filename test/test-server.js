@@ -125,7 +125,7 @@ describe('Clips', () => {
     })
     beforeEach(done => {
         let tempClip = new Clip ()
-        tempClip.title = "I'M WINNINGett"
+        tempClip.title = "I'MwINNINGett"
         tempClip.img = "https://clips-media-assets.twitch.tv/22763830688-index-0000003416-preview.jpg"
         tempClip.author = "Cool_guy_user"
         tempClip.date = new Date()
@@ -181,6 +181,16 @@ describe('Clips', () => {
                         done()
                     })
                 })
+        })
+    })
+
+    it('should return search results', done => {
+        chai.request(app)
+        .get('/search?q='+"I'MwINNINGett")
+        .end((err, res) => {
+            res.body[0].should.have.property('title')
+            res.body[0].title.should.be.equal("I'MwINNINGett")
+            done()
         })
     })
 })

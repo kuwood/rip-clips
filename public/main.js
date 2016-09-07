@@ -115,7 +115,7 @@ function getTopVideos(callback) {
 }
 
 function showVideoList(data) {
-    for (index in data.videos) {
+    for (let index in data.videos) {
         $('#videos').append('<div class="vid"><a href="#"><img src=' +
             data.videos[index].img + '></a>' +
             '<div class="details-box"><a class="vid-details" href="' +
@@ -144,7 +144,7 @@ function shrinkTitle(title) {
 
 function showUserData(user) {
     $('#user-name').html(user.name)
-    for (index in user.videos) {
+    for (let index in user.videos) {
         appendClip(user.videos[index])
     }
 }
@@ -160,8 +160,33 @@ function appendClip(clip) {
         shrinkTitle(clip.title) + '</p></div>')
 }
 
+function search(searchTerm) {
+    $.ajax({
+        url: '/search',
+        type: 'GET',
+        contentType: 'application/json',
+        data: searchTerm
+    })
+    .done(results => {
+        $('#videos').html("")
+        showVideoList(results)
+    })
+}
+
 $(() => {
     getAndShowVideos()
+    //clip search
+    $('#search-button').on('click', event => {
+        event.preventDefault()
+        console.log('works');
+        let searchTerm = {
+            q: $('#search').val()
+        }
+        console.log("front end searchTerm,", searchTerm);
+        search(searchTerm)
+    })
+
+    //add to myclips
     $('#clip-form').submit(() => {
         let data = {
             title: $('#clip-title-input').val(),
@@ -174,8 +199,8 @@ $(() => {
             data: JSON.stringify(data)
         })
         .done(clip => {
-                appendClip(clip)
-            })
+            appendClip(clip)
+        })
 
     })
     loginUser1()

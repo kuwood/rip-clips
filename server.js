@@ -88,16 +88,17 @@ app.get("/clips", function(req, res) {
 })
 
 app.get("/search", (req, res) => {
-    console.log(req.params.searchTerm, ".......req.params.searchTerm");
+    console.log(req.query.q, ".......req.params.q");
     Clip.find({
-        title: req.params.searchTerm
+        title: req.query.q
     },(err, clips) => {
         if (err) {
             return res.status(500).json({
                 message: 'Internal Server Error'
             })
         }
-        res.sendStatus(200).json(clips)
+        console.log("hello", clips);
+        res.status(200).json(clips)
     })
 
 
