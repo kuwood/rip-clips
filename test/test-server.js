@@ -1,5 +1,5 @@
 /*jshint expr: true*/
-
+global.DATABASE_URL = 'mongodb://localhost/top-clips-dev'
 const chai = require('chai')
 const chaiHttp = require('chai-http')
 const passport = require("passport")
@@ -15,7 +15,7 @@ const app = server.app
 
 chai.use(chaiHttp)
 
-server.runServer()
+
 
 describe('Index page', () => {
     it('exists', done => {
@@ -33,14 +33,17 @@ describe('Index page', () => {
 describe('Authentication', () => {
 
     before(done => {
+        server.runServer(()=> {
+            app.request.isAuthenticated = () => {
+                return true
+            }
+            done()
+        })
         //server.runServer()
         //mongoose.connect('mongodb://localhost/top-clips-dev');
 
         // Allows the middleware to think we're already authenticated.
-        app.request.isAuthenticated = () => {
-            return true
-        }
-        done()
+        //done()
     })
 
     after(done => {
@@ -103,7 +106,7 @@ describe('Not authenticated', () => {
 
 describe('Clips', () => {
     before(done => {
-        //server.runServer()
+        server.runServer()
         app.request.user = {
             twitchId: 12345,
             username: "one",
