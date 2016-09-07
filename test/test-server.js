@@ -106,7 +106,6 @@ describe('Not authenticated', () => {
 
 describe('Clips', () => {
     before(done => {
-        server.runServer()
         app.request.user = {
             twitchId: 12345,
             username: "one",
