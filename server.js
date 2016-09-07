@@ -144,7 +144,7 @@ app.post("/scrape", ensureAuthenticated, function(req, res) {
     request(url, function(error, response, html) {
         if (!error) {
             let $ = cheerio.load(html)
-
+            
             let userClip = new Clip();
             userClip.title = req.body.title
             userClip.img = $('.clip').attr('poster')

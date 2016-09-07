@@ -1,6 +1,6 @@
 //mock data
-let mockVideoList = {
-    "videos": [{
+let mockVideoList =
+    [{
         "vid_id": 1,
         "title": "I'M WINNING",
         "img": "https://clips-media-assets.twitch.tv/22763830688-index-0000003416-preview.jpg",
@@ -65,7 +65,7 @@ let mockVideoList = {
         "game": "Dota 2",
         "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
     }]
-}
+
 
 let mockUserList = {
     "users": [{
@@ -114,16 +114,26 @@ function getTopVideos(callback) {
     }, 500)
 }
 
+function shortenGameName(clip) {
+    game = clip.game.replace(/\s/g, '')
+    if (game === "Counter-Strike:GlobalOffensive") {
+        game = "CS:GO"
+        return game
+    } else {
+        return clip.game
+    }
+}
+
 function showVideoList(data) {
-    for (let index in data.videos) {
+    for (let index in data) {
         $('#videos').append('<div class="vid"><a href="#"><img src=' +
-            data.videos[index].img + '></a>' +
+            data[index].img + '></a>' +
             '<div class="details-box"><a class="vid-details" href="' +
-            data.videos[index].author + '">' +
-            data.videos[index].author + '</a>' +
-            '<a class="vid-details" href="' + data.videos[index].game + '">' +
-            data.videos[index].game + '</a></div>' +
-            '<p>' + data.videos[index].title + '</p></div>')
+            data[index].author + '">' +
+            data[index].author + '</a>' +
+            '<a class="vid-details" href="' + data[index].game + '">' +
+            shortenGameName(data[index]) + '</a></div>' +
+            '<p>' + data[index].title + '</p></div>')
     }
 }
 
@@ -169,6 +179,7 @@ function search(searchTerm) {
     })
     .done(results => {
         $('#videos').html("")
+        console.log(results)
         showVideoList(results)
     })
 }
@@ -176,13 +187,12 @@ function search(searchTerm) {
 $(() => {
     getAndShowVideos()
     //clip search
-    $('#search-button').on('click', event => {
+    $('.fa-search').on('click', event => {
         event.preventDefault()
-        console.log('works');
         let searchTerm = {
-            q: $('#search').val()
+            q: $('.main-search').val()
         }
-        console.log("front end searchTerm,", searchTerm);
+        console.log(searchTerm.q);
         search(searchTerm)
     })
 
