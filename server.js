@@ -1,7 +1,7 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const mongoose = require('mongoose')
-const authConfig = require('./oauth')
+
 const User = require('./models/user-model')
 const Clip = require('./models/clip-model')
 const passport = require("passport")
@@ -15,6 +15,13 @@ const dbConfig = require('./dbConfig')
 const app = express()
 const jsonParser = bodyParser.json()
 const Strategy = require("passport-twitch").Strategy
+let authConfig;
+//check env to determine twitch oauth source
+if (!process.env.clientID) {
+     authConfig = require('./oauth')
+}
+
+
 app.config = dbConfig
 app.use(cookieParser());
 app.use(cookieSession({
@@ -80,7 +87,8 @@ app.get("/clips", function(req, res) {
     })
 })
 
-app.get("/search/", (req, res) => {
+app.get("/search", (req, res) => {
+    console.log(req.params.searchTerm, ".......req.params.searchTerm");
     Clip.find({
         title: req.params.searchTerm
     },(err, clips) => {
