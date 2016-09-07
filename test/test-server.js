@@ -15,6 +15,8 @@ const app = server.app
 
 chai.use(chaiHttp)
 
+server.runServer()
+
 describe('Index page', () => {
     it('exists', done => {
         chai.request(app)
@@ -31,7 +33,8 @@ describe('Index page', () => {
 describe('Authentication', () => {
 
     before(done => {
-        mongoose.connect('mongodb://localhost/top-clips-dev');
+        //server.runServer()
+        //mongoose.connect('mongodb://localhost/top-clips-dev');
 
         // Allows the middleware to think we're already authenticated.
         app.request.isAuthenticated = () => {
@@ -44,7 +47,7 @@ describe('Authentication', () => {
         app.request.isAuthenticated = () => {
             return false
         }
-        mongoose.connection.close()
+        //mongoose.connection.close()
         done()
     })
     beforeEach(done => {
@@ -100,7 +103,7 @@ describe('Not authenticated', () => {
 
 describe('Clips', () => {
     before(done => {
-        server.runServer()
+        //server.runServer()
         app.request.user = {
             twitchId: 12345,
             username: "one",
