@@ -113,13 +113,16 @@ app.get("/auth/twitch", passport.authenticate('twitch'),
 
 
 app.get("/auth/twitch/callback", passport.authenticate("twitch", {
+    //successRedirect: '/logged_in.html',
     failureRedirect: "/"
 }), function(req, res) {
     // Successful authentication, redirect home.
     //req.session.user = req.user
     //console.log(req.query);
     //console.log(req.body);
-    res.sendStatus(200);
+    console.log(req.session.user, "rahhh");
+    res.cookie("user")
+    res.redirect('/logged_in.html')
 });
 
 app.get('/logout', function(req, res) {
@@ -128,14 +131,14 @@ app.get('/logout', function(req, res) {
 });
 
 app.get("/account", ensureAuthenticated, function(req, res) {
-    res.sendStatus(200)
+    res.status(200).json(req.session.user)
 })
 
 app.get("/myclips", ensureAuthenticated, function(req, res) {
-    User.find({
+    Clip.find({
         twitchId: req.user.twitchId
-    }, function(err, user) {
-        res.status(200).json(req.user.clips)
+    }, function(err, clips) {
+        res.status(200).json(clips)
     });
 })
 
@@ -144,7 +147,7 @@ app.post("/scrape", ensureAuthenticated, function(req, res) {
     request(url, function(error, response, html) {
         if (!error) {
             let $ = cheerio.load(html)
-            
+
             let userClip = new Clip();
             userClip.title = req.body.title
             userClip.img = $('.clip').attr('poster')

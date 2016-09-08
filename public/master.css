@@ -176,6 +176,10 @@ body{
     height: 74px;
 }
 
+.del {
+    cursor: pointer;
+}
+
 .width-75 {
     width: 75% !important;
     flex-direction: column;
