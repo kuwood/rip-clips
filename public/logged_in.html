@@ -31,11 +31,14 @@
                 <a id="user-name" class="user" href="#">USER_NAME</a>
                 <a class="user" href="/logout">Logout</a>
             </div>
+            <p id="clip-submit-title" class="panel-title">Submit a clip:</p>
             <form id="clip-form">
-              <div class="box center">
+              <div class="box center pad-bottom">
                   <div class="container-4 width-75">
                       <input type="search" required class="search" id="clip-title-input" placeholder="Enter A title" />
                   </div>
+              </div>
+              <div class="box center">
                   <div class="container-4 width-75">
                       <input type="search" required class="search" id="clip-input" placeholder="Enter Clip Url.." />
                   </div>
@@ -44,8 +47,13 @@
                   <button class="btn" >Submit Clip</button>
               </div>
             </form>
-            <p id="library">My Clips:</p>
+            <p id="library" class="panel-title">My Clips:</p>
             <div class="myClips">
+            </div>
+        </div>
+        <div id="vid-overlay" class="overlay">
+            <a href="javascript:void(0)" class="closebtn">&times;</a>
+            <div class="overlay-content">
             </div>
         </div>
     </body>

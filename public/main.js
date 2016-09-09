@@ -46,7 +46,7 @@ function shrinkTitle(title) {
 
 function showVideoList(data) {
     for (let index in data) {
-        $('#videos').append('<div class="vid"><a href="#"><img src=' +
+        $('#videos').append('<div class="vid" data-id="'+data[index].link.substring(24)+'"><a class="overlay-link" ><img src=' +
             data[index].img + '></a>' +
             '<div class="details-box"><a class="vid-details" href="' +
             data[index].author + '">' +
@@ -54,7 +54,20 @@ function showVideoList(data) {
             '<a class="vid-details" href="' + data[index].game + '">' +
             shortenGameName(data[index]) + '</a></div>' +
             '<p>' + data[index].title + '</p></div>')
+
     }
+    $('.overlay-link').on('click', event => {
+        let slugLink = $(event.target).parent().parent().data('id')
+
+        $('.overlay-content').append('<iframe src="https://clips.twitch.tv/embed?clip='+slugLink+'&autoplay=false" height="360" width="640" frameborder="0" scrolling="no" allowfullscreen="true"><iframe>')
+        openOverlay()
+    })
+
+    $('.closebtn').on('click', event => {
+        $('iframe').remove()
+        closeOverlay()
+    })
+
 }
 
 
@@ -83,6 +96,17 @@ function getMyClips(){
             shortenGameName(clips[index])
             appendClip(clips[index])
         }
+        $('.overlay-myclips-link').on('click', event => {
+            let slugLink = $(event.target).parent().data('id')
+
+            $('.overlay-content').append('<iframe src="https://clips.twitch.tv/embed?clip='+slugLink+'&autoplay=false" height="360" width="640" frameborder="0" scrolling="no" allowfullscreen="true"><iframe>')
+            openOverlay()
+        })
+
+        $('.closebtn').on('click', event => {
+            $('iframe').remove()
+            closeOverlay()
+        })
     })
 }
 
@@ -98,10 +122,12 @@ function appendClip(clip) {
     $('.myClips').append(
         '<div class="vid-small" data-id="'+clip._id+'">'+
         '<a class="del"><i class="fa fa-times-circle" aria-hidden="true"></i></a>' +
-        '<a><img src=' + clip.img +
+        '<a class="overlay-myclips-link" data-id="'+clip.link.substring(24)+'"><img src=' + clip.img +
         '></a><a class="vid-details flex center" href="' + clip.game + '">' +
         shortenGameName(clip) + '</a><p>' +
         shrinkTitle(clip.title) + '</p></div>')
+
+
 
     //remove clip
     $('.del').on('click', event => {
@@ -118,6 +144,16 @@ function appendClip(clip) {
             $(event.target).parent().parent().remove()
         })
     })
+}
+
+
+
+function openOverlay() {
+    document.getElementById("vid-overlay").style.height = "100%";
+}
+
+function closeOverlay() {
+    document.getElementById("vid-overlay").style.height = "0%";
 }
 
 //doc ready
@@ -155,6 +191,10 @@ $(() => {
         })
 
     })
+
+    // $('.vid, .small-vid').on('click', event => {
+    //     $(event.target).append('<div id="vid-overlay" class="overlay"> <a href="javascript:void(0)" class="closebtn" onclick="closeOverlay()">&times;</a> <div class="overlay-content"> <iframe src="https://clips.twitch.tv/embed?clip=starladder_cs_en/"+clip.link.substring(24)+"&autoplay=false" height="360" width="640" frameborder="0" scrolling="no" allowfullscreen="true"> </iframe> </div> </div>')
+    // })
 
     //mobile user panel
     $('.burger').click(() => {
