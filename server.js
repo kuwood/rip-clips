@@ -88,7 +88,6 @@ app.get("/clips", function(req, res) {
 })
 
 app.get("/search", (req, res) => {
-    console.log(req.query.q, ".......req.params.q");
     Clip.find({
         title: req.query.q
     },(err, clips) => {
@@ -97,7 +96,6 @@ app.get("/search", (req, res) => {
                 message: 'Internal Server Error'
             })
         }
-        console.log("hello", clips);
         res.status(200).json(clips)
     })
 
@@ -113,14 +111,9 @@ app.get("/auth/twitch", passport.authenticate('twitch'),
 
 
 app.get("/auth/twitch/callback", passport.authenticate("twitch", {
-    //successRedirect: '/logged_in.html',
     failureRedirect: "/"
 }), function(req, res) {
-    // Successful authentication, redirect home.
-    //req.session.user = req.user
-    //console.log(req.query);
-    //console.log(req.body);
-    console.log(req.session.user, "rahhh");
+
     res.cookie("user")
     res.redirect('/logged_in.html')
 });
@@ -131,7 +124,7 @@ app.get('/logout', function(req, res) {
 });
 
 app.get("/account", ensureAuthenticated, function(req, res) {
-    res.status(200).json(req.session.user)
+    res.status(200).json(req.user)
 })
 
 app.get("/myclips", ensureAuthenticated, function(req, res) {

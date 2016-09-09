@@ -149,7 +149,7 @@ body{
     display: inline-block;;
     color: #CFD8DC;
     text-align: center;
-    margin: 6% auto;
+    margin: 20px auto;
 }
 
 .user:hover {
@@ -239,19 +239,19 @@ body{
 }
 
 .container-4 input.search::-webkit-input-placeholder {
-   color: #CFD8DC;
+   color: #666666;
 }
 
 .container-4 input.search:-moz-placeholder { /* Firefox 18- */
-   color: #CFD8DC;
+   color: #666666;
 }
 
 .container-4 input.search::-moz-placeholder {  /* Firefox 19+ */
-   color: #CFD8DC;
+   color: #666666;
 }
 
 .container-4 input.search:-ms-input-placeholder {
-   color: #CFD8DC;
+   color: #666666;
 }
 
 .container-4 button.icon{

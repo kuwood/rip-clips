@@ -8,7 +8,6 @@ function getTopVideos() {
     })
     .done(results => {
         $('#videos').html("")
-        console.log(results)
         showVideoList(results)
     })
 }
@@ -22,7 +21,6 @@ function search(searchTerm) {
     })
     .done(results => {
         $('#videos').html("")
-        console.log(results)
         showVideoList(results)
     })
 }
@@ -81,6 +79,7 @@ function getUser(){
         contentType: 'application/json'
     })
     .done(user => {
+        console.log(user.username);
         showUserData(user)
     })
 }
@@ -111,11 +110,12 @@ function getMyClips(){
 }
 
 function showUserData(user) {
-    console.log(user, "showuserdata");
+    //console.log(user, "showuserdata")
     $('#user-name').html(user.username)
-    for (let index in user.clips) {
-        appendClip(user.clips[index])
-    }
+    console.log(user.username)
+    // for (let index in user.clips) {
+    //     appendClip(user.clips[index])
+    // }
 }
 
 function appendClip(clip) {
@@ -132,9 +132,7 @@ function appendClip(clip) {
     //remove clip
     $('.del').on('click', event => {
         event.preventDefault()
-        console.log("clicked")
         let id = $(event.target).parent().parent().data('id')
-        console.log(id)
         $.ajax({
             url: '/clips/'+id,
             type: 'DELETE',
@@ -167,7 +165,6 @@ $(() => {
         let searchTerm = {
             q: $('.main-search').val()
         }
-        console.log(searchTerm.q);
         search(searchTerm)
     })
 
