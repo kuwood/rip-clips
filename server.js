@@ -125,7 +125,7 @@ app.get('/logout', function(req, res) {
 });
 
 app.get("/account", ensureAuthenticated, function(req, res) {
-    res.status(200).json(req.session.passport.user)
+    res.status(200).json(req.user)
 })
 
 app.get("/myclips", ensureAuthenticated, function(req, res) {
