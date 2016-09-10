@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+    <link rel="stylesheet" href="master.css" media="screen" title="no title" charset="utf-8">
+    <title></title>
+</head>
+
+<body>
+
+    <div id="vid-overlay" class="overlay">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+        <div class="overlay-content">
+            <iframe src="https://clips.twitch.tv/embed?clip="+clip.link.substring(24)+"&autoplay=false" height="360" width="640" frameborder="0" scrolling="no" allowfullscreen="true">
+            </iframe>
+        </div>
+    </div>
+    <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; open</span>
+
+</body>
+
+<script>
+function openOverlay() {
+    document.getElementById("vid-overlay").style.height = "100%";
+}
+
+function closeOverlay() {
+    document.getElementById("vid-overlay").style.height = "0%";
+}
+</script>
+
+</html>

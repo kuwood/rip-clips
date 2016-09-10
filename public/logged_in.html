@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>RIP Clips</title>
-
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" >
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
@@ -17,7 +17,7 @@
                 </div>
                 <div class="box account-box">
                     <div class="container-4">
-                        <input type="search" id="search" placeholder="Search..." />
+                        <input type="search" class="search main-search"  placeholder="Search..." />
                         <button class="icon"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
@@ -29,18 +29,31 @@
         <div class="user-panel">
             <div class="user-box">
                 <a id="user-name" class="user" href="#">USER_NAME</a>
-                <a class="user" href="#">Logout</a>
+                <a class="user" href="/logout">Logout</a>
             </div>
-            <div class="box center">
-                <div class="container-4 width-75">
-                    <input type="search" id="search" placeholder="Enter Clip Url.." />
-                </div>
-            </div>
-            <div class="button-box pad-5">
-                <a class="btn"href="#">Submit Clip</a>
-            </div>
-            <p id="library">My Clips:</p>
+            <p id="clip-submit-title" class="panel-title">Submit a clip:</p>
+            <form id="clip-form">
+              <div class="box center pad-bottom">
+                  <div class="container-4 width-75">
+                      <input type="search" required class="search" id="clip-title-input" placeholder="Enter A title" />
+                  </div>
+              </div>
+              <div class="box center">
+                  <div class="container-4 width-75">
+                      <input type="search" required class="search" id="clip-input" placeholder="Enter Clip Url.." />
+                  </div>
+              </div>
+              <div class="button-box pad-5">
+                  <button class="btn" >Submit Clip</button>
+              </div>
+            </form>
+            <p id="library" class="panel-title">My Clips:</p>
             <div class="myClips">
+            </div>
+        </div>
+        <div id="vid-overlay" class="overlay">
+            <a href="javascript:void(0)" class="closebtn">&times;</a>
+            <div class="overlay-content">
             </div>
         </div>
     </body>

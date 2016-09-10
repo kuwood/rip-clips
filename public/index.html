@@ -3,6 +3,7 @@
     <head>
         <meta charset="utf-8">
         <title>RIP Clips</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" >
         <link rel="stylesheet" href="master.css" media="screen" title="no title" charset="utf-8">
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
         <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
@@ -16,12 +17,12 @@
                 </div>
                 <div class="box">
                     <div class="container-4">
-                        <input type="search" id="search" placeholder="Search..." />
-                        <button class="icon"><i class="fa fa-search"></i></button>
+                        <input type="search" class="search main-search" placeholder="Search..." />
+                        <button id="search-button" class="icon"><i class="fa fa-search"></i></button>
                     </div>
                 </div>
                 <div class="button-box">
-                    <a class="btn"href="logged_in.html">Log In</a>
+                    <a class="btn"href="/auth/twitch">Log In</a>
                 </div>
             </header>
             <div class="description">
@@ -29,6 +30,12 @@
                 <p>Using the search bar above you can find the most popular clips as well as clips from your favorite users. Once you are ready to contribute your favorite twitch moments use the log in above and sign in to your account using your twitch id!
             </div>
             <div id="videos">
+            </div>
+        </div>
+        <div id="vid-overlay" class="overlay">
+            <a href="javascript:void(0)" class="closebtn">&times;</a>
+            <div class="overlay-content">
+
             </div>
         </div>
     </body>

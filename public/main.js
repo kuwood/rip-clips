@@ -1,181 +1,206 @@
-//mock data
-let mockVideoList = {
-    "videos": [
-        {
-            "vid_id": 1,
-            "title": "I'M WINNING",
-            "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "Cool_guy_user",
-            "date": "1471567701",
-            "game": "Dota 2",
-            "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
-        },
-        {
-            "vid_id": 2,
-            "title": "I'M LOSING",
-            "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "Cool_guy_user",
-            "date": "1471567701",
-            "game": "Dota 2",
-            "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
-        },
-        {
-            "vid_id": 3,
-            "title": "IT'S TIED",
-            "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "Cool_guy_user",
-            "date": "1471567701",
-            "game": "Dota 2",
-            "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
-        },
-        {
-            "vid_id": 4,
-            "title": "I'M WINNING AGAIN!!",
-            "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "Cool_guy_user",
-            "date": "1471567701",
-            "game": "Dota 2",
-            "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
-        },
-        {
-            "vid_id": 5,
-            "title": "I'M LOSING AGAIN...",
-            "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "Cool_guy_user",
-            "date": "1471567701",
-            "game": "Dota 2",
-            "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
-        },
-        {
-            "vid_id": 6,
-            "title": "TIED...AGAIN...",
-            "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "Cool_guy_user",
-            "date": "1471567701",
-            "game": "Dota 2",
-            "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
-        },
-        {
-            "vid_id": 7,
-            "title": "IS IT OVER YET???",
-            "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "Cool_guy_user",
-            "date": "1471567701",
-            "game": "Dota 2",
-            "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
-        },
-        {
-            "vid_id": 8,
-            "title": "NOW ITS OVER...",
-            "img": "https://static-cdn.jtvnw.net/v1/AUTH_system/vods_baa7/dota2ti_22792960032_499428624/thumb/thumb0-320x240.jpg",
-            "author": "Cool_guy_user",
-            "date": "1471567701",
-            "game": "Dota 2",
-            "link": "https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid"
-        }
-    ]
-}
-
-let mockUserList = {
-    "users": [
-        {
-            "id": 1,
-            "name": "COOL_USER_GUY",
-            "videos": mockVideoList.videos,
-            "pw": "1234",
-            "twitch_id": "5"
-        },
-        {
-            "id": 2,
-            "name": "fake",
-            "videos": [{}],
-            "pw": "1234",
-            "twitch_id": "6"
-        },
-        {
-            "id": 3,
-            "name": "throw_away",
-            "videos": [{}],
-            "pw": "1234",
-            "twitch_id": "7"
-        },
-        {
-            "id": 4,
-            "name": "another_one",
-            "videos": [{}],
-            "pw": "1234",
-            "twitch_id": "8"
-        },
-        {
-            "id": 5,
-            "name": "smart",
-            "videos": [{}],
-            "pw": "1234",
-            "twitch_id": "9"
-        },
-        {
-            "id": 6,
-            "name": "loyal",
-            "videos": [{}],
-            "pw": "1234",
-            "twitch_id": "10"
-        }
-    ]
-}
-
 //client
-function getTopVideos(callback) {
-    setTimeout(() => { callback(mockVideoList)}, 500)
+
+function getTopVideos() {
+    $.ajax({
+            url: '/clips',
+            type: 'GET',
+            contentType: 'application/json'
+        })
+        .done(results => {
+            $('#videos').html("")
+            showVideoList(results)
+        })
 }
 
-function showVideoList(data) {
-    for (index in data.videos) {
-        $('#videos').append('<div class="vid"><a href="#"><img src=' +
-                            data.videos[index].img + '></a>' +
-                            '<div class="details-box"><a class="vid-details" href="' +
-                            data.videos[index].author + '">' +
-                            data.videos[index].author + '</a>' +
-                            '<a class="vid-details" href="' + data.videos[index].game + '">' +
-                            data.videos[index].game + '</a></div>' +
-                            '<p>' + data.videos[index].title + '</p></div>')
+function search(searchTerm) {
+    $.ajax({
+            url: '/search',
+            type: 'GET',
+            contentType: 'application/json',
+            data: searchTerm
+        })
+        .done(results => {
+            $('#videos').html("")
+            showVideoList(results)
+        })
+}
+
+function shortenGameName(clip) {
+    game = clip.game.replace(/\s/g, '')
+    if (game === "Counter-Strike:GlobalOffensive") {
+        game = "CS:GO"
+        return game
+    } else {
+        return clip.game
     }
-}
-
-function getAndShowVideos() {
-    getTopVideos(showVideoList)
-}
-
-function loginUser1() {
-    showUserData(mockUserList.users[0])
 }
 
 function shrinkTitle(title) {
     if (title.length > 12) {
-        return title.substring(0,12) + "..."
+        return title.substring(0, 12) + "..."
     }
     return title
 }
 
-function showUserData(user) {
-    $('#user-name').html(user.name)
-    for (index in user.videos) {
-        $('.myClips').append('<div class="vid-small"><i class="fa fa-times-circle" aria-hidden="true"></i>' +
-                            '<a href="#"><img src=' +
-                            user.videos[index].img +
-                            '></a><a class="vid-details flex center" href="' + user.videos[index].game + '">' +
-                            user.videos[index].game + '</a><p>' +
-                            shrinkTitle(user.videos[index].title) + '</p></div>')
+function slugLinkClosure(slugLink) {
+    return () => {
+        //let slugLink = slugLink
+        let frame = `<iframe src="https://clips.twitch.tv/embed?clip=${slugLink}&autoplay=false" height="360" width="640" frameborder="0" scrolling="no" allowfullscreen="true"><iframe>`
+        frame = $(frame)
+        $('.overlay-content').append(frame)
+        openOverlay()
+        return slugLink
     }
 }
 
+function showVideoList(data) {
+    for (let index in data) {
+        let clipElement = `<div class="vid"><a class="overlay-link"><img src='${data[index].img}'></a><div class="details-box"><a class="vid-details">${data[index].author}</a><a class="vid-details">${shortenGameName(data[index])}</a></div><p>${data[index].title}</p></div>`
+        console.log(clipElement, "showvid for loop");
+
+        clipElement = $(clipElement)
+        clipElement.click(slugLinkClosure(data[index].link.substring(24)))
+        $('#videos').append(clipElement)
+
+    }
+
+    $('.closebtn').on('click', event => {
+        $('iframe').remove()
+        closeOverlay()
+    })
+
+}
+
+
+//user functions
+
+function getUser() {
+
+    $.ajax({
+            url: '/account',
+            type: 'GET',
+            contentType: 'application/json'
+        })
+        .done(user => {
+            console.log(user.username);
+            showUserData(user)
+        })
+}
+
+function getMyClips() {
+    $.ajax({
+            url: '/myClips',
+            type: 'GET',
+            contentType: 'application/json'
+        })
+        .done(clips => {
+            for (let index in clips) {
+                shortenGameName(clips[index])
+                appendClip(clips[index])
+            }
+
+            $('.closebtn').on('click', event => {
+                $('iframe').remove()
+                closeOverlay()
+            })
+        })
+}
+
+function showUserData(user) {
+    $('#user-name').html(user.username)
+    console.log(user.username)
+        // for (let index in user.clips) {
+        //     appendClip(user.clips[index])
+        // }
+}
+
+function appendClip(clip) {
+    let clipElement = `<div class="vid-small">
+                        <a class="del"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
+                        <a class="overlay-myclips-link" >
+                        <img src="${clip.img}"></a>
+                        <a class="vid-details flex center">${shortenGameName(clip)}</a>
+                        <p>${shrinkTitle(clip.title)}</p></div>`
+    clipElement = $(clipElement)
+    clipElementLink = $(clipElement).find('.overlay-myclips-link')
+    clipElementLink.click(slugLinkClosure(clip.link.substring(24)))
+    $('.myClips').append(clipElement)
+
+    //remove clip
+    $('.del').on('click', event => {
+        event.preventDefault()
+        let id = clip._id
+        $.ajax({
+                url: '/clips/' + id,
+                type: 'DELETE',
+                contentType: 'application/json'
+            })
+            .done(() => {
+                $(event.target).parent().parent().remove()
+            })
+    })
+}
+
+
+
+function openOverlay() {
+    document.getElementById("vid-overlay").style.height = "100%";
+}
+
+function closeOverlay() {
+    document.getElementById("vid-overlay").style.height = "0%";
+}
+
+//doc ready
+
 $(() => {
-    getAndShowVideos()
-    loginUser1()
+    getTopVideos()
+
+    //clip search
+    $('.fa-search').on('click', event => {
+        event.preventDefault()
+        let searchTerm = {
+            q: $('.main-search').val()
+        }
+        search(searchTerm)
+    })
+    $(".main-search").keypress(event => {
+        if (event.which == 13) {
+            event.preventDefault()
+            let searchTerm = {
+                q: $('.main-search').val()
+            }
+            search(searchTerm)
+        }
+    });
+
+    getUser()
+    getMyClips()
+
+    //add to myclips
+    $('#clip-form').submit(() => {
+        let data = {
+            title: $('#clip-title-input').val(),
+            link: $('#clip-input').val()
+        }
+        $.ajax({
+                url: '/scrape',
+                type: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data)
+            })
+            .done(clip => {
+                appendClip(clip)
+            })
+
+    })
+
+    //mobile user panel
     $('.burger').click(() => {
         if ($('.user-panel').css('right') === '0px') {
-            $('.user-panel').css('right','-700px')
+            $('.user-panel').css('right', '-700px')
         } else {
-            $('.user-panel').css('right','0px')
+            $('.user-panel').css('right', '0px')
         }
     })
 })
