@@ -1,6 +1,10 @@
 {
   "name": "top-clips",
   "version": "1.0.0",
+  "engines": {
+    "node": "6.3.1",
+    "npm": "3.10.3"
+  },
   "description": "A place for users to find the most entertaining video clips and keep a library of thier own clip submissions.",
   "main": "server.js",
   "scripts": {
