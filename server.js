@@ -89,8 +89,9 @@ app.get("/clips", function(req, res) {
 
 app.get("/search", (req, res) => {
     Clip.find({
-        title: req.query.q
+        title: {'$regex': req.query.q}
     },(err, clips) => {
+        console.log(err,clips);
         if (err) {
             return res.status(500).json({
                 message: 'Internal Server Error'
@@ -124,7 +125,7 @@ app.get('/logout', function(req, res) {
 });
 
 app.get("/account", ensureAuthenticated, function(req, res) {
-    res.status(200).json(req.user)
+    res.status(200).json(req.session.passport.user)
 })
 
 app.get("/myclips", ensureAuthenticated, function(req, res) {

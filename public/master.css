@@ -364,13 +364,19 @@ body{
 }
 
 @media (max-width: 750px) {
-    .purple h1 {
+    .purple h1, .logo-white {
         font-size: 1.5em;
+    }
+    .logo-white {
+       font-size: 0.7em;
+    }
+    .box {
+        flex: 1;
     }
     .user-panel {flex: 2 1;}
     .header-account {display: block;}
     .purple {align-items: center;}
-    .purple h1 {padding: 0;}
+    .purple h1, .logo-white h1{padding: 0;}
     .account-box {padding-left: 20px;}
     .vid {max-width: 100%;}
     .user-panel {right: -700px;position: absolute;width: 80%;transition-duration: 0.5s; transition-timing-function: linear; transition-delay: 0.3;}
