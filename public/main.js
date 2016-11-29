@@ -178,7 +178,8 @@ $(() => {
     getMyClips()
 
     //add to myclips
-    $('#clip-form').submit(() => {
+    $('#clip-form').submit((e) => {
+        e.preventDefault()
         let data = {
             title: $('#clip-title-input').val(),
             link: $('#clip-input').val()
@@ -190,6 +191,7 @@ $(() => {
                 data: JSON.stringify(data)
             })
             .done(clip => {
+                console.log('appending', clip);
                 appendClip(clip)
             })
 
