@@ -142,8 +142,8 @@ describe('Clips', () => {
         })
     })
 
-    it('should scrape data from url and create a clip object', done => {
-        let clip = {title: 'test', link: 'http://localhost' + ':' + app.config.PORT + '/test-page.html'}
+    it('should fetch data from clips api and create a clip object', done => {
+        let clip = {title: 'test', link: 'https://clips.twitch.tv/dota2ti/SmilingCaribouTwitchRaid'}
         chai.request(app)
             .post('/scrape')
             .send(clip)
