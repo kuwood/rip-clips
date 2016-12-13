@@ -55,7 +55,7 @@ function slugLinkClosure(slugLink) {
 
 function showVideoList(data) {
     for (let index in data) {
-        let clipElement = `<div class="vid"><a class="overlay-link"><img src='${data[index].img}'></a><div class="details-box"><a class="vid-details">${data[index].author}</a><a class="vid-details">${shortenGameName(data[index])}</a></div><p>${data[index].title}</p></div>`
+        let clipElement = `<div class="vid"><a class="overlay-link"><img src='${data[index].img}'></a><p class="vid-title">${data[index].title}</p><div class="details-box"><a class="vid-details game">${shortenGameName(data[index])}</a><a class="vid-details author">${data[index].author}</a></div></div>`
         console.log(clipElement, "showvid for loop");
 
         clipElement = $(clipElement)
@@ -119,8 +119,8 @@ function appendClip(clip) {
                         <a class="del"><i class="fa fa-times-circle" aria-hidden="true"></i></a>
                         <a class="overlay-myclips-link" >
                         <img src="${clip.img}"></a>
-                        <a class="vid-details flex center">${shortenGameName(clip)}</a>
-                        <p>${shrinkTitle(clip.title)}</p></div>`
+                        <p class="vid-title">${shrinkTitle(clip.title)}</p>
+                        <a class="vid-details flex white">${shortenGameName(clip)}</a></div>`
     clipElement = $(clipElement)
     clipElementLink = $(clipElement).find('.overlay-myclips-link')
     clipElementLink.click(slugLinkClosure(clip.link.substring(24)))
