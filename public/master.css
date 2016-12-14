@@ -20,10 +20,15 @@ body{
     display: flex;
     padding: 0;
     margin: 0;
-    background-color: #FAFAFA;
+    background-image: linear-gradient(135deg, #fafafa, #CFD8DC);
     color: #212121;
-    font-family: 'Crimson Text', serif;
+    font-family: 'Roboto', sans-serif;
     height: 100%;
+    overflow-x: hidden;
+}
+
+#logout {
+  cursor: pointer;
 }
 
 .content{
@@ -31,22 +36,28 @@ body{
     overflow: auto;
 }
 .header{
+    padding: 0 20px 20px;
     display: flex;
     align-items: center;
     width: 100%;
     background-color: #455A64;
     border-bottom: 1px solid #BDBDBD;
+    flex-wrap: wrap;
 }
 
 .header-account {
     display: flex;
     padding: 0 10%;
+    flex-wrap: wrap;
+    margin-left: 0;
+    margin-right: 0;
 }
 
 .logo-white {
     display: flex;
-    flex: 1;
-    flex-direction: column;
+    flex: 1 1 20%;
+    flex-direction: row;
+    justify-content: flex-start;
     align-items: center;
     color: #FFF;
     font-family: 'Julius Sans One', sans-serif;
@@ -54,22 +65,27 @@ body{
 }
 
 .purple {
+    justify-content: center;
+    flex 1 1 100%;
     color: #7C4DFF;
     align-items: stretch;
+    margin-right: 0;
 }
 
 .logo-white h1 {
-    padding-left: 20px;
+    font-size: 1.8em;
 }
 
 .button-box {
     display: flex;
-    flex: 1;
-    justify-content: center;
+    flex: 1 1 50%;
+    justify-content: flex-end;
     align-items: center;
+    height: 72.5px;
 }
 
 .btn {
+  text-align: center;
   -webkit-border-radius: 3;
   -moz-border-radius: 3;
   border-radius: 3px;
@@ -83,7 +99,7 @@ body{
   padding: 8px 18px 8px 18px;
   text-decoration: none;
   transition: font-size 0.2s;
-  font-family: 'Crimson Text', serif;
+  font-family: 'Roboto', sans-serif;
   font-weight: bold;
   letter-spacing: 1px;
 }
@@ -94,15 +110,23 @@ body{
   -moz-box-shadow: 1px 5px 10px #212121;
   box-shadow: 1px 5px 10px #212121;
   font-size: 16px;
+  cursor: pointer;
 }
 
 .description {
-    padding: 5% 25% 5% 25%;
-    background-color: #CFD8DC;
+    padding: 5% 12% 5% 12%;
+}
+
+.description h2 {
+  font-size: 2em;
+}
+
+.description p {
+  font-size: 1em;
 }
 
 #videos {
-    padding: 5% 10%;
+    padding: 4.5% 10%;
     list-style: none;
     display: flex;
     flex-wrap: wrap;
@@ -111,38 +135,82 @@ body{
 
 .details-box {
     display: flex;
+    flex-direction: column;
 }
 
 .vid-details {
     flex: 2;
     justify-content: space-between;
     cursor: default;
+    color: #575757;
+    font-size: .75em;
+}
+
+.game {
+  margin-top: 4px;
+}
+
+.vid-title {
+  margin: 0;
+  text-align: left;
+  color: #7C4DFF;
+}
+
+iframe {
+  max-width: 100vw;
+}
+
+.white {
+  color: #fafafa;
 }
 
 .vid {
-    padding: 0 20px;
-    text-align: center;
-    flex: 1 1 auto;
-    max-width: 25%;
+  flex: 1 1 auto;
+  padding: 0 20px;
+  margin-bottom: 20px;
 }
 .vid img {
     width: 100%;
 }
 
 .burger {
-    display: none;
+  position:fixed;
+  display:block;
+  top: 15px;
+  right: 20px;
+  z-index: 1000;
+  cursor: pointer;
 }
 
 .user-panel {
-    flex: 1 1;
-    background-color: #455A64;
-    text-align: center;
-    height: 100%;
-    overflow-y: auto;
+  flex: 2 1;
+  right: -700px;
+  position: absolute;
+  width: 80%;
+  text-align: center;
+  height: 100%;
+  overflow-y: auto;
+  background-color: #455A64;
+  transition-duration: 0.5s;
+  transition-timing-function: linear;
+  transition-delay: 0.3;
 }
 
 .user-box {
     display: flex;
+    margin-right: 45px;
+}
+
+#clip-submit-title {
+  margin-top: 40px;
+}
+
+.sub-clip {
+  justify-content: center;
+}
+
+#library {
+  margin-top: 40px;
 }
 
 .user {
@@ -165,6 +233,8 @@ body{
     min-width: 25%;
     display: inline-block;
     position: relative;
+    margin-bottom: 20px;
+    max-width: calc(100vw - 40%);
 }
 
 .fa-times-circle {
@@ -174,7 +244,7 @@ body{
 }
 
 .vid-small img {
-    height: 74px;
+    width: 100%;
 }
 
 .del {
@@ -202,18 +272,20 @@ body{
     padding: 5%;
 }
 
-
+.main-search {
+  border: 1px solid #7C4DFF !important;
+}
 
 /* Search Bar */
 .box{
     display: flex;
     align-items: center;
-    flex: 2;
+    flex: 1 1 100%;
+    order: 3;
 }
 
 .account-box {
-    flex: 3;
-    padding-right: 20px;
+    flex: 1 1 100%;
 }
 
 .container-4{
@@ -227,7 +299,7 @@ body{
   width: 100%;
   height: 30px;
   outline: none !important;
-  background: #FFFFFF;
+  background: #FAFAFA;
   border: 1px solid #BDBDBD;
   font-size: 12pt;
   float: left;
@@ -263,7 +335,7 @@ body{
   border-bottom-right-radius: 1px;
 
   border: none;
-  background: #FFFFFF;
+  background: #FAFAFA;
   height: 28px;
   width: 40px;
   margin-top: 1px;
@@ -285,7 +357,8 @@ body{
 }
 
 .container-4:hover button.icon:hover{
-  background: #CFD8DC;
+  background: #7C4DFF;
+  cursor: pointer;
 }
 
 
@@ -345,40 +418,66 @@ body{
   }
 }
 
-
-
 /* media queries */
 
-@media (max-width: 1384px) {
-    .vid {max-width: 33%}
-    .user-panel {overflow: auto}
-    .account-box {
-        flex: 2;
-    }
-}
-@media (max-width: 950px) {
-    .vid {max-width: 50%}
-    .account-box {
-        flex: 1;
-    }
+@media (min-width: 750px) {
+  .header {
+    padding-top: 20px;
+  }
+  .header-account {
+    margin-left: 20px;
+    margin-right: 20px;
+  }
+  .logo-white {
+    justify-content: center;
+  }
+
+  .purple {
+    flex: 0 1 auto;
+    margin-right: 20px;
+  }
+
+  .account-box {
+    flex: 1 1 auto;
+  }
+
+  .vid {
+    flex: 1 1 50%;
+  }
+  .box {
+    order: 2;
+    flex: 1 1 60%;
+  }
+  .button-box {
+    justify-content: center;
+    flex: 1 1 20%;
+    order: 3;
+    padding-left: 20px;
+  }
 }
 
-@media (max-width: 750px) {
-    .purple h1, .logo-white {
-        font-size: 1.5em;
-    }
-    .logo-white {
-       font-size: 0.7em;
-    }
-    .box {
-        flex: 1;
-    }
-    .user-panel {flex: 2 1;}
-    .header-account {display: block;}
-    .purple {align-items: center;}
-    .purple h1, .logo-white h1{padding: 0;}
-    .account-box {padding-left: 20px;}
-    .vid {max-width: 100%;}
-    .user-panel {right: -700px;position: absolute;width: 80%;transition-duration: 0.5s; transition-timing-function: linear; transition-delay: 0.3;}
-    .burger {position:fixed;display:block;top: 0;right: 20px;z-index: 1000;}
+@media (min-width: 850px) {
+  .user-panel {
+    flex: 1 1;
+    max-width: 300px;
+    position: static;
+    background-color: #455A64;
+    text-align: center;
+    height: 100%;
+    overflow-y: auto;
+    transition: none;
+  }
+
+  .user-box {
+    margin-right: 0;
+  }
+
+  .burger {
+    display: none;
+  }
+}
+
+@media (min-width: 1200px) {
+  .vid {max-width: 33%}
+  .user-panel {overflow: auto}
 }

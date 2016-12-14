@@ -2,11 +2,11 @@
 <html>
     <head>
         <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1">
         <title>RIP Clips</title>
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" >
         <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.1.0/css/font-awesome.min.css" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One" rel="stylesheet">
-        <link href="https://fonts.googleapis.com/css?family=Crimson+Text" rel="stylesheet">
+        <link href="https://fonts.googleapis.com/css?family=Julius+Sans+One|Roboto" rel="stylesheet">
         <link rel="stylesheet" href="master.css" media="screen" title="no title" charset="utf-8">
     </head>
     <body>
@@ -29,7 +29,7 @@
         <div class="user-panel">
             <div class="user-box">
                 <a id="user-name" class="user" href="#">USER_NAME</a>
-                <a class="user" href="/logout">Logout</a>
+                <a id="logout" class="user" href="/logout">Logout</a>
             </div>
             <p id="clip-submit-title" class="panel-title">Submit a clip:</p>
             <form id="clip-form">
@@ -43,7 +43,7 @@
                       <input type="search" required class="search" id="clip-input" placeholder="Enter Clip Url.." />
                   </div>
               </div>
-              <div class="button-box pad-5">
+              <div class="button-box pad-5 sub-clip">
                   <button class="btn" >Submit Clip</button>
               </div>
             </form>
