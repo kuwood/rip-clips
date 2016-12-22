@@ -8,7 +8,8 @@ This app gives you the ability to find awesome moments users have captured from 
 
 ## In action:
 ### Home Page
-<img src='https://raw.githubusercontent.com/kuwood/top-clips/master/readme_images/Home_page_1_2.jpg'>
+<img src='https://i.imgur.com/pWbU6na.png' width='800'>
+
 From this page you can: 
 * search for clips via the top search input.
 * Log In using your twitch account.
@@ -21,7 +22,8 @@ From this page you can:
 * Upon clicking Log In you will be redirected to twitch and use their authentication to Log In to your account.
 
 ### Logged In
-<img src='https://raw.githubusercontent.com/kuwood/top-clips/master/readme_images/logged_in_1_2.jpg'>
+<img src='https://i.imgur.com/VguIB64.png' width='800'>
+
 From this page you can: 
 * Once you are logged in you can again search, browse and play clips users have uploaded.
 * You can also upload your own clips using the input boxes on the right providing a clip name as well as the clip link.
