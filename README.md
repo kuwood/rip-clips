@@ -22,7 +22,7 @@ From this page you can:
 * Upon clicking Log In you will be redirected to twitch and use their authentication to Log In to your account.
 
 ### Logged In
-<img src='https://i.imgur.com/VguIB64.png' width='800'>
+<img src='https://i.imgur.com/GtMDYFT.png' width='800'>
 
 From this page you can: 
 * Once you are logged in you can again search, browse and play clips users have uploaded.
